@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: savimar-deployment
+spec:
+    replicas: 3
+    strategy:
+      type: Recreate
+    selector:
+       matchLabels:
+          app: savimar-demo
+    template:
+       metadata:
+          labels:
+             app: savimar-demo
+       spec:
+          containers:
+          - name: savimar-demo
+            image: savimar/savimar-demo:v2
+            imagePullPolicy: Always
+            ports:
+              - name: web 
+                containerPort: 80
+            livenessProbe:
+              httpGet:
+                port: 80
+                path: /healthz
+              initialDelaySeconds: 15
+              periodSeconds: 5
+              timeoutSeconds: 2
+              failureThreshold: 1
+            readinessProbe:
+              httpGet:
+                port: 80
+                path: /healthy
+              initialDelaySeconds: 25
+              periodSeconds: 5
