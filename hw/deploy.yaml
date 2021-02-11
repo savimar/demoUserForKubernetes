@@ -16,8 +16,7 @@ spec:
        spec:
           containers:
           - name: savimar-demo
-            image: savimar/savimar-demo:v2
-            imagePullPolicy: Always
+            image: savimar/savimar:latest
             ports:
               - name: web 
                 containerPort: 80
