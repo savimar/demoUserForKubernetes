@@ -10,7 +10,7 @@ spec:
   - host: arch.homework
     http:
       paths:
-        - path: /
+        - path: /*
           backend:
             serviceName: otus-service
             servicePort: 8080

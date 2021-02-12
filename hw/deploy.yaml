@@ -16,22 +16,18 @@ spec:
        spec:
           containers:
           - name: savimar-demo
-            image: savimar/savimar-demo:v2
+            image: savimar/savimar:savimar
             imagePullPolicy: Always
             ports:
               - name: web 
-                containerPort: 80
+                containerPort: 8080
             livenessProbe:
-              httpGet:
-                port: 80
-                path: /healthz
-              initialDelaySeconds: 15
-              periodSeconds: 5
-              timeoutSeconds: 2
-              failureThreshold: 1
+             tcpSocket:
+              port: 8080
+             initialDelaySeconds: 300
+             periodSeconds: 30
             readinessProbe:
-              httpGet:
-                port: 80
-                path: /healthy
-              initialDelaySeconds: 25
-              periodSeconds: 5
+             tcpSocket:
+              port: 8080
+             initialDelaySeconds: 300
+             periodSeconds: 30
