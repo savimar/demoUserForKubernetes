@@ -14,4 +14,3 @@ spec:
           backend:
             serviceName: otus-service
             servicePort: 8080      
-            

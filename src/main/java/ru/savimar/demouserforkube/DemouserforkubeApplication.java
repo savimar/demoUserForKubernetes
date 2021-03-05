@@ -16,7 +16,7 @@ public class DemouserforkubeApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemouserforkubeApplication.class, args);
     }
-    @Autowired
+   /* @Autowired
     private UserRepository repository;
 
     @EventListener(ApplicationReadyEvent.class)
@@ -37,5 +37,5 @@ public class DemouserforkubeApplication {
 
         allUsers = this.repository.findAll();
 
-    }
+    }*/
 }

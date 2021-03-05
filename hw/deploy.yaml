@@ -16,7 +16,7 @@ spec:
        spec:
           containers:
           - name: savimar-demo
-            image: savimar/savimar:savimar
+            image: savimar/forkube:forkube
             imagePullPolicy: Always
             ports:
               - name: web 
@@ -31,3 +31,7 @@ spec:
               port: 9090
              initialDelaySeconds: 100
              periodSeconds: 30
+             
+             
+             
+            

@@ -14,7 +14,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create
     ports:
-    - 8080:8080
+    - 9090:9090
 
   db:
     image: 'postgres:13.1-alpine'
