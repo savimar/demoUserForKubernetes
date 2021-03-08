@@ -13,9 +13,12 @@ import java.util.List;
 @SpringBootApplication
 public class DemouserforkubeApplication {
 
+
     public static void main(String[] args) {
         SpringApplication.run(DemouserforkubeApplication.class, args);
     }
+
+
    /* @Autowired
     private UserRepository repository;
 

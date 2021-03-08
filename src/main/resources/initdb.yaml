@@ -35,7 +35,7 @@ spec:
           - |
             psql $DATABASE_URI <<'EOF'
               drop table IF EXISTS users;
-              create table users (  id serial primary key, first_name varchar(200),last_name varchar(200););
-              insert into users (first_name,last_name ) values ('Иван', 'Иванов'),('Нина', 'Петрова');
+              create table users (  id serial primary key, first_name varchar(200), last_name varchar(200));
+              insert into users ( id, first_name,last_name ) values (1, 'Ivan','Ivanov'),(2, 'Jon', 'First');
             EOF
-  backoffLimit: 10
+  backoffLimit: 3
