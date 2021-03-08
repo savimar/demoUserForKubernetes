@@ -17,7 +17,7 @@ public class UserController {
 
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
 
     @RequestMapping("/health")

@@ -1,0 +1,22 @@
+
+
+containerPort: 9090
+
+persistence:
+  enabled: false
+  
+
+service:
+  type: NodePort
+  port: 8080
+  
+
+ingress:
+  enabled: true
+  hostname: arch.homework
+  path: /(.*)
+
+podSecurityContext:
+  enabled: false
+  
+

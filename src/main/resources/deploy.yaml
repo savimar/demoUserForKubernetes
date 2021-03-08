@@ -17,11 +17,11 @@ spec:
 #         initContainers:
 #          - name: check-db-ready
 #            image: postgres:13.1-alpine
-#           command:
-#            - sh
-#            - "-c"
-#            - |
-#              until pg_isready -h postrgres  -p  5432;
+#            command:
+#             - sh
+#             - "-c"
+#             - |
+#               until pg_isready -h postrgres  -p  5432;
 #               do echo waiting for database; sleep 2; done;
          containers:
           - name: savimar-demo

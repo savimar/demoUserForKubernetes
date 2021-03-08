@@ -2,27 +2,29 @@
  
  minikube addons enable ingress
  
- kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission 
- 
- kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.34.1/deploy/static/provider/cloud/deploy.yaml
- 
- kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.34.1/deploy/static/provider/cloud/deploy.yaml
- 
  kubectl apply -f C:\Users\Maria\IdeaProjects\demoUserForKubernetes\hw
  
  helm repo add bitnami https://charts.bitnami.com/bitnami
+ helm repo add banzaicloud-stable https://kubernetes-charts.banzaicloud.com
 
  helm repo update
  
- helm install savimar bitnami/postgresql -f savimar_values.yaml
+
+ helm install my-spring-boot banzaicloud-stable/spring-boot 
  
- curl -s http://192.168.99.100:31988/db
+ helm install savimar bitnami/postgresql -f savimar_values.yaml
+ kubectl create -f user-config.yaml
+ 
+ curl -s http://192.168.99.100:30239/db  | jg
  
  192.168.99.100
+ http://192.168.99.100:30239
  
+ psql -h  192.168.99.100 -p 30239 -U postgres -W users
+
  
- 
- 
+  helm install savimar bitnami/tomcat -f values.yaml          
+ kubectl apply -f pg.yaml    
  
  
  
