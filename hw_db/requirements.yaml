@@ -1,7 +1,0 @@
-dependencies:
-- name: postrgresql
-  version: 8.x.x
-  repository: https://charts.bitnami.com/bitnami
-  condition: postgresql.enabled
-  tags:
-    - spring-java-app-database

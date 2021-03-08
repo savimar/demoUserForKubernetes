@@ -1,0 +1,22 @@
+ 
+ 
+ minikube addons enable ingress
+ 
+ kubectl apply -f C:\Users\Maria\IdeaProjects\demoUserForKubernetes\hw
+ 
+ helm repo add bitnami https://charts.bitnami.com/bitnami
+
+ helm repo update
+ 
+ kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission 
+
+ helm install savimar bitnami/tomcat -f values.yaml       
+ 
+ psql -h  192.168.99.100 -p 31995 -U postgres -W users
+
+ 
+  
+ kubectl apply -f pg.yaml    
+ 
+ 
+ 
