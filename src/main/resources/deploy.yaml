@@ -13,16 +13,28 @@ spec:
        metadata:
           labels:
              app: savimar-demo
-       spec:
-#         initContainers:
-#          - name: check-db-ready
-#            image: postgres:13.1-alpine
-#            command:
-#             - sh
-#             - "-c"
-#             - |
-#               until pg_isready -h postrgres  -p  5432;
-#               do echo waiting for database; sleep 2; done;
+       spec: 
+         restartPolicy: Always
+         initContainers:
+         - name: check-db-ready
+           image: postgres:13.1-alpine
+           env:
+            - name: POSTGRES_HOST
+              value: "postgres"
+            - name: POSTGRES_PORT
+              value: "5432"
+           command:
+            - sh
+            - "-c"
+            - |
+              until pg_isready -h $POSTGRES_HOST  -p  $POSTGRES_PORT;
+              do echo waiting for database; sleep 2; done;
+#          - name: db
+#            image: busybox
+#            command: ['sh', '-c', 'until nslookup postgres; do echo waiting for postgres-statefulset; sleep 2; done;']
+#          - name: init-db
+#            image: busybox
+#            command: ['sh', '-c', 'until nslookup initdb; do echo waiting for initdb; sleep 2; done;']  
          containers:
           - name: savimar-demo
             image: savimar/forkube:forkube
