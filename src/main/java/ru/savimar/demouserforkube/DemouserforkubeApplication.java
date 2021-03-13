@@ -19,26 +19,5 @@ public class DemouserforkubeApplication {
     }
 
 
-   /* @Autowired
-    private UserRepository repository;
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void runAfterStartup() {
-        List allUsers = this.repository.findAll();
-
-        User user = new User();
-        user.setFirstName("Нина");
-        user.setLastName("Петрова");
-
-        this.repository.save(user);
-
-        User user1 = new User();
-        user1.setFirstName("Иван");
-        user1.setLastName("Иванов");
-
-        this.repository.save(user1);
-
-        allUsers = this.repository.findAll();
-
-    }*/
 }

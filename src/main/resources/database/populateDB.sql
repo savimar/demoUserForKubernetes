@@ -1,4 +1,4 @@
-insert into users (first_name,last_name )
+insert into users (id, first_name,last_name )
 values
-('Иван', 'Иванов'),
-('Нина', 'Петрова');
+(1,'Иван', 'Иванов'),
+(2,'Нина', 'Петрова');

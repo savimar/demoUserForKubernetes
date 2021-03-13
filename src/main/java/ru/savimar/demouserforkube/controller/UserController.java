@@ -21,7 +21,7 @@ public class UserController {
 
 
     @RequestMapping("/health")
-    public String health() {
+    public @ResponseBody String health() {
         return "{\"status\": \"OK\"}";
     }
 
@@ -41,9 +41,23 @@ public class UserController {
         } else {
             model.addAttribute("user", new User());
         }
+
         return "adduser";
     }
-
+ //for postman
+    @RequestMapping(path = {"/save", "/save/{id}"})
+    public @ResponseBody String saveEmployeeById(@RequestBody User user, @PathVariable("id") Optional<Integer> id) {
+        User entity;
+        if (id.isPresent()) {
+            entity = userService.getUserById(id.get());
+            entity.setFirstName(user.getFirstName());
+            entity.setLastName(user.getLastName());
+            userService.save(entity);
+        } else {
+            entity = userService.save(user);
+        }
+        return entity.toString();
+    }
     @RequestMapping(path = "/delete/{id}")
     public String deleteEmployeeById(Model model, @PathVariable("id") Integer id){
         userService.delete(id);

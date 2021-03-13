@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+data:
+  DB_NAME: users   
+  SPRING_DATASOURCE_URL: jdbc:postgresql://pg:5432/users
+  DB_HOST: pg
+  spring.jpa.hibernate.ddl-auto: create
+  spring.datasource.driver-class-name: org.postgresql.Driver
+  spring.jpa.database: postgresql
+  spring.jpa.database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+  spring.datasource.initialization-mode: ALWAYS
+  
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-secret
+type: Opaque
+data:
+  #POSTGRESQL_USERNAME: ZGJ1c2Vy
+  postgresql-password: cm9vdA==
+  DATABASE_URL: cG9zdGdyZXNxbDovL3Bvc3RncmVzOnJvb3RAcG9zdGdyZXM6NTQzMi91c2Vycw0K

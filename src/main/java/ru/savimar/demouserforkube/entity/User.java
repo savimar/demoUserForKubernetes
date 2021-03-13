@@ -3,6 +3,7 @@ package ru.savimar.demouserforkube.entity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name="users")
 @Getter
 @Setter
+@ToString
 @EqualsAndHashCode
 public class User {
     @Id
@@ -19,5 +21,6 @@ public class User {
     private String firstName;
     @Column(name="last_name")
     private String lastName;
+
 
 }
