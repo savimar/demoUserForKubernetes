@@ -12,13 +12,15 @@
  
  helm install postrgedb bitnami/postgresql -f values.yaml 
  
- (если ошибка при установке ингресса)
+
  kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission 
 
  kubectl apply -f C:\Users\Maria\IdeaProjects\demoUserForKubernetes\src\main\resources
  
+ kubectl get all (ждем когда поднимутся поды)
+ 
  (проверка данных в БД)
- psql -h  192.168.99.100 -p 31725 -U postgres -W users (port NodePort service/pg)
+ psql -h  192.168.99.100 -p 31725 -U postgres -W users (port NodePort service/pg, host - minikube ip)
  Пароль: root
  select * from users;
  
