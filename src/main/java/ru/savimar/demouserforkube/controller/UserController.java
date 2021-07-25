@@ -12,7 +12,6 @@ import java.util.Optional;
 
 
 @Controller
-@RequestMapping("/")
 public class UserController {
 
 
@@ -21,12 +20,12 @@ public class UserController {
 
 
     @RequestMapping("/health")
-    public @ResponseBody String health() {
+    public @ResponseBody
+    String health() {
         return "{\"status\": \"OK\"}";
     }
 
-
-    @RequestMapping
+    @RequestMapping("/")
     public String showUserList(Model model) {
         List<User> userList = userService.findAll();
         model.addAttribute("userList", userList);
@@ -44,29 +43,29 @@ public class UserController {
 
         return "adduser";
     }
- //for postman
+
+    //for postman
     @RequestMapping(path = {"/save", "/save/{id}"})
-    public @ResponseBody String saveEmployeeById(@RequestBody User user, @PathVariable("id") Optional<Integer> id) {
-        User entity;
+    public String saveEmployeeById(@RequestBody User user, @PathVariable("id") Optional<Integer> id) {
         if (id.isPresent()) {
-            entity = userService.getUserById(id.get());
-            entity.setFirstName(user.getFirstName());
-            entity.setLastName(user.getLastName());
-            userService.save(entity);
+            User newUser = userService.getUserById(id.get());
+            newUser.setFirstName(user.getFirstName());
+            newUser.setLastName(user.getLastName());
+            userService.save(newUser);
         } else {
-            entity = userService.save(user);
+            userService.save(user);
         }
-        return entity.toString();
+        return "redirect:/";
     }
+
     @RequestMapping(path = "/delete/{id}")
-    public String deleteEmployeeById(Model model, @PathVariable("id") Integer id){
+    public String deleteEmployeeById(Model model, @PathVariable("id") Integer id) {
         userService.delete(id);
         return "redirect:/";
     }
 
     @RequestMapping(path = "/createUser", method = RequestMethod.POST)
-    public String createOrUpdateEmployee(User user)
-    {
+    public String createOrUpdateEmployee(User user) {
         userService.save(user);
         return "redirect:/";
     }

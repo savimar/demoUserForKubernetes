@@ -1,29 +1,79 @@
  
+ minikube start 
  
  minikube addons enable ingress 
 
  helm repo add bitnami https://charts.bitnami.com/bitnami
 
  helm repo update
+ 
+ kubectl create ns app
+
+ kubectl config set-context --current --namespace=app
+
 
  cd C:\Users\Maria\IdeaProjects\demoUserForKubernetes\src\main\resources\db_yaml
  
  kubectl apply -f user-config.yaml  
  
  helm install postrgedb bitnami/postgresql -f values.yaml 
- 
 
- kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission 
+  kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission 
 
- kubectl apply -f C:\Users\Maria\IdeaProjects\demoUserForKubernetes\src\main\resources
+  kubectl apply -f C:\Users\Maria\IdeaProjects\demoUserForKubernetes\src\main\resources
  
- kubectl get all (ждем когда поднимутся поды)
+ kubectl get all  (ждем когда поднимутся поды)
  
  (проверка данных в БД)
- psql -h  192.168.99.100 -p 31725 -U postgres -W users (port NodePort service/pg, host - minikube ip)
+ psql -h  192.168.99.101 -p 31725 -U postgres -W users (port NodePort service/pg, host - minikube ip)
  Пароль: root
  select * from users;
+
+ \q
+
+ kubectl logs pod/savimar-deployment-6889bb7d56-5jkxf
+
+  
+  kubectl get all --all-namespaces   
+
+   kubectl describe pod/pg-0
  
+   kubectl get ingress --all-namespaces
+
+     kubectl delete deployment.apps/savimar-deployment
+
+
+
+
+
+ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+  helm repo add stable https://charts.helm.sh/stable
+
+ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
+ helm repo update
+
+
+ cd C:\Users\Maria\IdeaProjects\demoUserForKubernetes\src\main\resources\metrics
+  
+
+ kubectl create namespace monitoring
+
+  kubectl config set-context --current --namespace=monitoring
+
+
+ helm install -n monitiring prom prometheus-community/kube-prometheus-stack -f prometheus.yaml --atomic
+ 
+ helm install -n monitoring nginx ingress-nginx/ingress-nginx -f nginx-ingress.yaml --atomic
+
+
+ 
+ 
+  kubectl port-forward service/prom-kube-prometheus-stack-prometheus 9090
+
+  
+
   
 
  
