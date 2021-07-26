@@ -1,0 +1,10 @@
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelector: {}
+  scrape_configs:
+    - job_name: 'spring'
+      metrics_path: '/actuator/prometheus'
+      static_configs:
+        - targets: [ 'http://arch.homework:9091' ]
+
