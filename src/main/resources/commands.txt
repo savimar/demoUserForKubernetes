@@ -63,7 +63,7 @@
   kubectl config set-context --current --namespace=monitoring
 
 
- helm install -n monitiring prom prometheus-community/kube-prometheus-stack -f prometheus.yaml --atomic
+ helm install -n monitoring prom prometheus-community/kube-prometheus-stack -f prometheus.yaml --atomic
  
  helm install -n monitoring nginx ingress-nginx/ingress-nginx -f nginx-ingress.yaml --atomic
 
