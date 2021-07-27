@@ -8,3 +8,8 @@ prometheus:
       static_configs:
         - targets: [ 'http://arch.homework:9091' ]
 
+grafana:
+  sidecar:
+    dashboards:
+      enabled: true
+      label: grafana-dashboard

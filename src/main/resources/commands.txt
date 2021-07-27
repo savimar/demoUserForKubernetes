@@ -35,15 +35,16 @@
 
   
   kubectl get all --all-namespaces   
+  
+  kubectl get ingress --all-namespaces   
 
    kubectl describe pod/pg-0
  
-   kubectl get ingress --all-namespaces
 
      kubectl delete deployment.apps/savimar-deployment
 
 
-
+  
 
 
  helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -65,7 +66,7 @@
 
  helm install -n monitoring prom prometheus-community/kube-prometheus-stack -f prometheus.yaml --atomic
  
- helm install -n monitoring nginx ingress-nginx/ingress-nginx -f nginx-ingress.yaml --atomic
+ helm install  nginx ingress-nginx/ingress-nginx -f nginx-ingress.yaml --atomic
 
 
  
