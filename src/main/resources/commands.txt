@@ -87,20 +87,16 @@
 
   while 1; do ab -n 50 -c 5 http://192.168.99.100:30259/db ; sleep 3; 
 
- cd f:/ab/Apache24/bin
+  cd f:/ab/Apache24/bin
   .\ab -n 50 -c 5 http://192.168.99.100:32449/db/
   .\ab -n 50 -c 5 http://192.168.99.100:30259/
 
-  ab -n 50 -c 5 http://192.168.99.100:30929/db ; sleep 3;
-  watch -n 3 .\ab -c 5 -n 50 -r  http://192.168.99.100:30259/
-
-
-  .\ab -n 10000 -c 50 -t 3  -r -t 3000 http://192.168.99.100:30172/
+   .\ab -n 10000 -c 50 -t 3  -r -t 3000 http://192.168.99.100:30172/
  
  
  rpc sum(rate(http_server_requests_seconds_count{pod="savimar-deployment-5796ffb6b4-nclgz"}[2m]))
  latency histogram_quantile(0.9, sum by (le) (rate(http_server_requests_seconds_bucket{pod="savimar-deployment-5796ffb6b4-nclgz"}[5m])))
 
- sum by (status) (increase(http_server_requests_seconds_bucket{pod="savimar-deployment-5796ffb6b4-nclgz", status=~"5.+"}[1m]))
+ 
 
  500  sum by (status) (increase(http_server_requests_seconds_count{pod="savimar-deployment-5796ffb6b4-nclgz", status=~"5.+"}[1m]))
