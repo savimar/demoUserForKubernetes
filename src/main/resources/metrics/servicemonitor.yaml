@@ -2,19 +2,20 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: otus-monitor
-  namespace: monitoring
+  
   labels:
-    app: otus
+    release: prom
 spec:
   selector:
     matchLabels:
-      - app: savimar-demo
-    namespaceSelector:
-      matchNames:
-        - app
+     { app: savimar-demo}
+  namespaceSelector:
+    matchNames:
+      - app
   endpoints:
-    - port: 9093
+    - port: metrics
       scheme: http
       path: '/actuator/prometheus'
       interval: 60s
-      honorLabels: false
+     
+     

@@ -32,6 +32,7 @@
  \q
 
  kubectl logs pod/savimar-deployment-6889bb7d56-5jkxf
+ 
 
   
   kubectl get all --all-namespaces   
@@ -65,18 +66,41 @@
 
 
  helm install -n monitoring prom prometheus-community/kube-prometheus-stack -f prometheus.yaml --atomic
+
+  kubectl config set-context --current --namespace=default
+
+ kubectl apply -f servicemonitor.yaml   --validate=false
+
+ kubectl get servicemonitor --all-namespaces
  
- helm install  nginx ingress-nginx/ingress-nginx -f nginx-ingress.yaml --atomic
+ #helm install  nginx ingress-nginx/ingress-nginx -f nginx-ingress.yaml --atomic
 
 
  
  
   kubectl port-forward service/prom-kube-prometheus-stack-prometheus 9090
+  
+    kubectl port-forward service/prom-grafana 9000:80
+
 
   
 
-  
+  while 1; do ab -n 50 -c 5 http://192.168.99.100:30259/db ; sleep 3; 
 
+ cd f:/ab/Apache24/bin
+  .\ab -n 50 -c 5 http://192.168.99.100:32449/db/
+  .\ab -n 50 -c 5 http://192.168.99.100:30259/
+
+  ab -n 50 -c 5 http://192.168.99.100:30929/db ; sleep 3;
+  watch -n 3 .\ab -c 5 -n 50 -r  http://192.168.99.100:30259/
+
+
+  .\ab -n 10000 -c 50 -t 3  -r -t 3000 http://192.168.99.100:30172/
  
  
- 
+ rpc sum(rate(http_server_requests_seconds_count{pod="savimar-deployment-5796ffb6b4-nclgz"}[2m]))
+ latency histogram_quantile(0.9, sum by (le) (rate(http_server_requests_seconds_bucket{pod="savimar-deployment-5796ffb6b4-nclgz"}[5m])))
+
+ sum by (status) (increase(http_server_requests_seconds_bucket{pod="savimar-deployment-5796ffb6b4-nclgz", status=~"5.+"}[1m]))
+
+ 500  sum by (status) (increase(http_server_requests_seconds_count{pod="savimar-deployment-5796ffb6b4-nclgz", status=~"5.+"}[1m]))
