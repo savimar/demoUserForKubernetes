@@ -4,9 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.savimar.demouserforkube.entity.Customer;
 import ru.savimar.demouserforkube.entity.User;
+import ru.savimar.demouserforkube.repository.CustomerDAO;
 import ru.savimar.demouserforkube.service.UserService;
+import java.security.Principal;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +21,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private CustomerDAO customerDAO;
 
 
     @RequestMapping("/health")
@@ -69,4 +75,18 @@ public class UserController {
         userService.save(user);
         return "redirect:/";
     }
+
+    @GetMapping(path = "/customers")
+    public String customers(Principal principal, Model model) {
+      //  addCustomers();
+        model.addAttribute("customers", customerDAO.findAll());
+        //model.addAttribute("username", principal.getName());
+        return "customers";
+    }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) throws Exception {
+        request.logout();
+        return "redirect:/";
+    }
+
 }

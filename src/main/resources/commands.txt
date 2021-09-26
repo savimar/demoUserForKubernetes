@@ -1,5 +1,7 @@
  
  minikube start 
+
+ minikube start --driver=hyperv  --cpus=8 --memory=12g --cni=flannel --kubernetes-version="v1.19.0"
  
  minikube addons enable ingress 
 
@@ -18,22 +20,28 @@
  
  helm install postrgedb bitnami/postgresql -f values.yaml 
 
+ kubectl apply -f initdb.yaml
+
   kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission 
 
   kubectl apply -f C:\Users\Maria\IdeaProjects\demoUserForKubernetes\src\main\resources
  
  kubectl get all  (ждем когда поднимутся поды)
  
+ #db
+
  (проверка данных в БД)
- psql -h  192.168.99.101 -p 31725 -U postgres -W users (port NodePort service/pg, host - minikube ip)
+  cd "F:\Program Files\PostgreSQL\13\bin"
+ .\psql -h  172.31.170.123 -p 31508 -U postgres -W users (port NodePort service/pg, host - minikube ip)
  Пароль: root
  select * from users;
+ select * from customer;
 
  \q
 
  kubectl logs pod/savimar-deployment-6889bb7d56-5jkxf
  
-
+ curl  http://arch.homework/customers
   
   kubectl get all --all-namespaces   
   
@@ -46,7 +54,7 @@
 
 
   
-
+ #monitoring
 
  helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
@@ -100,3 +108,19 @@
  
 
  500  sum by (status) (increase(http_server_requests_seconds_count{pod="savimar-deployment-5796ffb6b4-nclgz", status=~"5.+"}[1m]))
+
+#keycloak
+
+#helm repo add codecentric https://codecentric.github.io/helm-charts
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+
+
+cd C:\Users\Maria\IdeaProjects\demoUserForKubernetes\src\main\resources\keycloak
+#helm install keycloak codecentric/keycloak -f  keycloak.yaml 
+helm install keycloak bitnami/keycloak -f  keycloak.yaml 
+T0VMDueBwz
+kubectl --namespace app port-forward pod/keycloak-0 8080
+123
+
+curl -X POST 'http://localhost:8080/auth/realms/SpringBootKeycloak/protocol/openid-connect/token' --header 'Content-Type: application/x-www-form-urlencoded'  --data-urlencode 'grant_type=password' --data-urlencode 'client_id=login-app' --data-urlencode 'client_secret=c50e79ae-52eb-466a-8c2b-a520f2b8fc22'  --data-urlencode 'username=user1'  --data-urlencode 'password=1'

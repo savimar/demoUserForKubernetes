@@ -5,7 +5,7 @@ metadata:
   namespace: app
 data:
   DB_NAME: users   
-  SPRING_DATASOURCE_URL: jdbc:postgresql://pg:5432/users
+  SPRING_DATASOURCE_URL: jdbc:postgresql://pg:5433/users
   DB_HOST: pg
   spring.jpa.hibernate.ddl-auto: create
   spring.datasource.driver-class-name: org.postgresql.Driver
@@ -23,4 +23,4 @@ type: Opaque
 data:
   #POSTGRESQL_USERNAME: ZGJ1c2Vy
   postgresql-password: cm9vdA==
-  DATABASE_URL: cG9zdGdyZXNxbDovL3Bvc3RncmVzOnJvb3RAcG9zdGdyZXM6NTQzMi91c2Vycw0K
+  DATABASE_URL: cG9zdGdyZXNxbDovL3Bvc3RncmVzOnJvb3RAcG9zdGdyZXM6NTQzMy91c2Vycw==

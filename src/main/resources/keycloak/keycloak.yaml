@@ -1,0 +1,9 @@
+
+service:
+  type: NodePort
+ingress:
+ enabled: true
+ host: auth.key.me
+       
+  
+  
