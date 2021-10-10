@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 
 @SpringBootApplication
+@EnableJpaRepositories(basePackages = "ru.savimar.demouserforkube.repository")
 public class DemouserforkubeApplication {
 
 

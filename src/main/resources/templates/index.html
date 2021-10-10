@@ -33,6 +33,7 @@
                                 <th>Фамилия</th>
                                 <th>Редактировать</th>
                                 <th>Удалить</th>
+                                <th>Заказы</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -47,6 +48,12 @@
                                 </td>
                                 <td>
                                     <a th:href="@{/delete/{id}(id=${user.id})}"
+                                       class="btn btn-primary">
+                                        <i class="fas fa-user-times ml-2"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a th:href="@{/orderForUser/{id}(id=${user.id})}"
                                        class="btn btn-primary">
                                         <i class="fas fa-user-times ml-2"></i>
                                     </a>
